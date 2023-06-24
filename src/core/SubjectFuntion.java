@@ -350,14 +350,13 @@ public class SubjectFuntion {
             showList();
             System.out.println("what subject you like to delete\n");
             int select = Main.choice(sizeId + 1);
-            
             subIdFromName = idList.get(select - 1);
             ArrayList <String> subInFor = GetList.getList(FILESUBIDLIST + "\\" + subIdFromName + ".txt");
             String delName = subInFor.get(0);
             String delId = subInFor.get(1);
             String delCredit = subInFor.get(2);
             do{
-                if(subInFor.size() < 5) {
+                if(subInFor.size() < 4) {
                     System.out.println("There are still students, can't not deleted.");
                     quit1 = true;
                 } else {
