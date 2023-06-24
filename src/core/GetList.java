@@ -23,6 +23,26 @@ public class GetList {
         }
         return list;
     }
+
+    public static ArrayList <String> getListDel (String path, String del){
+        ArrayList <String> list = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(path));                       
+            String line;
+            do {
+                line = reader.readLine();
+                if (line.equals(del)) {
+                } else if (line != null){
+                        list.add(line);
+                }
+            } while (line != null);
+            reader.close();
+        }
+        catch (Exception exception){
+            System.out.println("Cannot Read :  "+path);
+        }
+        return list;
+    }
 }
 
 

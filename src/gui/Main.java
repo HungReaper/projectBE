@@ -1,8 +1,11 @@
 package gui;
 
-import java.util.Scanner;
 import core.Menu;
 import core.StudentFunction;
+import core.SubjectFuntion;
+
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Main {
 
@@ -31,7 +34,7 @@ public class Main {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         clearConsole();
         Scanner scan = new Scanner(System.in);
         boolean quit = false;
@@ -45,6 +48,8 @@ public class Main {
                     StudentFunction.studentFunction();
                     break;
                 case 2:
+                    clearConsole();
+                    SubjectFuntion.subjectFuntion();
                     break;
                 case 3:
                     quit = true;

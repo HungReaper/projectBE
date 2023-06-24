@@ -66,14 +66,14 @@ public class StudentFunction {
     public static void read_updateInfor() {
         boolean quit = false;
         String filenameFromID = "";
-        ArrayList<String> idList = GetList.getList("D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data\\id.txt");
-        ArrayList <String> emailList = GetList.getList("D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data\\email.txt");
+        ArrayList<String> idList = GetList.getList("src\\data\\id.txt");
+        ArrayList <String> emailList = GetList.getList("src\\data\\email.txt");
         //ArrayList <String> subList = GetList.getList("D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data\\.txt");
         int sizeID = idList.size();
         System.out.println("Choose a student to read or update");
         int select = Main.choice(sizeID+1);
         filenameFromID = idList.get(select-1);
-        ArrayList <String> infor = GetList.getList("D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data\\"+filenameFromID+".txt");
+        ArrayList <String> infor = GetList.getList("src\\data\\"+filenameFromID+".txt");
         while (!quit) {
             int section = 0;
             do {
@@ -92,7 +92,7 @@ public class StudentFunction {
                         infor.set(2, newEmail);
                         emailList.set(select-1, newEmail);
                         try {
-                            Formatter file = new Formatter("D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data\\"+filenameFromID+".txt");
+                            Formatter file = new Formatter("src\\data\\"+filenameFromID+".txt");
                             for (String string : infor) {
                                 file.format(string+"\n");
                             }
@@ -102,7 +102,7 @@ public class StudentFunction {
                             System.out.println("Cannot over write student file !");
                         }
                         try {
-                            Formatter file = new Formatter("D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data\\email.txt");
+                            Formatter file = new Formatter("src\\data\\email.txt");
                             for (String string : emailList) {
                                 file.format(string+"\n");
                             }
@@ -118,7 +118,7 @@ public class StudentFunction {
                         String newDoB = setDayofBirth();
                         infor.set(3, newDoB);
                         try {
-                            Formatter file = new Formatter("D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data\\"+filenameFromID+".txt");
+                            Formatter file = new Formatter("src\\data\\"+filenameFromID+".txt");
                             for (String string : infor){
                                 file.format(string+"\n");
                             }
@@ -146,7 +146,7 @@ public class StudentFunction {
     // show list
     public static void showList() {
         System.out.println("---Student List---");
-        ArrayList<String> studentList = GetList.getList("D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data\\studentList.txt");
+        ArrayList<String> studentList = GetList.getList("src\\data\\studentList.txt");
         int i = 1;
         for (String stu : studentList) {
             System.out.println(i + ". " + stu);
@@ -236,14 +236,14 @@ public class StudentFunction {
         // write to a file
         // D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data
         try {
-            Formatter file = new Formatter("D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data\\SE" + id + ".txt");
+            Formatter file = new Formatter("src\\data\\SE" + id + ".txt");
             file.format(student.getName() + "\n" + student.getId() + "\n" + student.getEmail() + "\n"+ student.getDob().getDay() + " / " + student.getDob().getMonth() + " / "+ student.getDob().getYear() + "\n");                                           
             file.close();
         } catch (Exception exception) {
             System.out.println("Error: Cannot create student file");
         }
         try {
-            File idFile = new File("D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data\\id.txt");
+            File idFile = new File("src\\data\\id.txt");
             FileWriter fwritter = new FileWriter(idFile, true);
             BufferedWriter bwritter = new BufferedWriter(fwritter);
             bwritter.write("SE" + student.getId() + "\n");
@@ -252,7 +252,7 @@ public class StudentFunction {
             System.out.println("Cannot open id.txt");
         }
         try {
-            File emailFile = new File("D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data\\email.txt");
+            File emailFile = new File("src\\data\\email.txt");
             FileWriter fwritter = new FileWriter(emailFile, true);
             BufferedWriter bwritter = new BufferedWriter(fwritter);
             bwritter.write(student.getEmail() + "\n");
@@ -261,7 +261,7 @@ public class StudentFunction {
             System.out.println("Cannot open email.txt");
         }
         try {
-            File idFile = new File("D:\\VScode\\ProjectBE1\\Student_Management\\Student_Management\\src\\data\\studentList.txt");
+            File idFile = new File("src\\data\\studentList.txt");
             FileWriter fwritter = new FileWriter(idFile, true);
             BufferedWriter bwritter = new BufferedWriter(fwritter);
             bwritter.write(student.getName() + "\n");
