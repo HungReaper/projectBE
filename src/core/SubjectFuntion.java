@@ -1,8 +1,6 @@
 package core;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
@@ -79,17 +77,7 @@ public class SubjectFuntion {
                 check = true;
                 System.out.println("- Subject Name: ");
                 name = sc.nextLine();
-                int flag = CheckValid.checkSubName(name, FILESUBNAME);
-                if(flag == 1) {
-                    System.out.println("you should give this subject a name! please Re-Enter");
-                    check = false;
-                } else if(flag == 2) {
-                    System.out.println("your subject name is too long, please make it shor enought");
-                    check = false;
-                } else if(flag == 3) {
-                    System.out.println("subject name is already exited. Please Re-Enter");
-                    check = false;
-                }
+                check = CheckValid.checkSubName(name, FILESUBNAME);
             } while(!check);
             sub.setName(name);
             do {
@@ -97,17 +85,7 @@ public class SubjectFuntion {
                 System.out.println("- Subject id: ");
                 id = sc.nextLine();
                 id = id.toUpperCase();
-                int flag = CheckValid.checkSubId(id);
-                if(flag == 1) {
-                    System.out.println("The subject id already exited! please Re-Enter");
-                    check = false;
-                } else if(flag == 2) {
-                    System.out.println("you should give your subject a id");
-                    check = false;
-                } else if(flag == 3) {
-                    System.out.println("Your subject id is too long to remember, please Re-Enter subject id, I fogot it.");
-                    check = false;
-                }
+                check = CheckValid.checkSubId(id, FILESUBID);
             } while(!check);
             sub.setId(id);
 
@@ -115,17 +93,7 @@ public class SubjectFuntion {
                 check = true;
                 System.out.println("- Subject credit");
                 credit = sc.nextLine();
-                int flag = CheckValid.checkSubcredit(credit);
-                if(flag == 1) {
-                    System.out.println("your subject credit neeed to be a positive integers. Please Re-Enter!");
-                    check = false;
-                } else if(flag == 3) {
-                    System.out.println("your subject credit need to be a number. please Re-Enter!");
-                    check = false;
-                } else if(flag == 2) {
-                    System.out.println("your subject credit is to hight. please Re-Enter!");
-                    check = false;
-                }
+                check = CheckValid.checkSubcredit(credit);
             } while(!check);
             sub.setCredit(credit);
 
@@ -262,17 +230,7 @@ public class SubjectFuntion {
             check = true;
             Scanner sc = new Scanner(System.in);
             newName = sc.nextLine();
-            int flag =  CheckValid.checkSubName(newName, FILESUBNAME);
-            if(flag == 1) {
-                    System.out.println("you should give this subject a name! please Re-Enter");
-                    check = false;
-                } else if(flag == 2) {
-                    System.out.println("your subject name is too long, please make it shor enought");
-                    check = false;
-                } else if(flag == 3) {
-                    System.out.println("subject name is already exited. Please Re-Enter");
-                    check = false;
-                }
+            check = CheckValid.checkSubName(newName, FILESUBNAME);
         } while(!check);
         return newName;
     }
@@ -285,17 +243,7 @@ public class SubjectFuntion {
             Scanner sc = new Scanner(System.in);
             newId = sc.nextLine();
             newId.toUpperCase();
-            int flag = CheckValid.checkSubId(newId);
-            if(flag == 1) {
-                    System.out.println("The subject id already exited! please Re-Enter");
-                    check = false;
-                } else if(flag == 2) {
-                    System.out.println("you should give your subject a id");
-                    check = false;
-                } else if(flag == 3) {
-                    System.out.println("Your subject id is too long to remember, please Re-Enter subject id, I fogot it.");
-                    check = false;
-                }
+            check = CheckValid.checkSubId(newId, FILESUBID);
         } while(!check);
         return newId;
     }
@@ -307,17 +255,7 @@ public class SubjectFuntion {
             check = true;
             Scanner sc = new Scanner(System.in);
             newCredit = sc.nextLine();
-            int flag = CheckValid.checkSubcredit(newCredit);
-            if(flag == 1) {
-                System.out.println("your subject credit neeed to be a positive integers. Please Re-Enter!");
-                check = false;
-            } else if(flag == 3) {
-                System.out.println("your subject credit need to be a number. please Re-Enter!");
-                check = false;
-            } else if(flag == 2) {
-                System.out.println("your subject credit is to hight. please Re-Enter!");
-                check = false;
-            }
+            check = CheckValid.checkSubcredit(newCredit);
         } while(!check);
         return newCredit;
     }
@@ -342,9 +280,7 @@ public class SubjectFuntion {
         do{
             boolean quit1 = true;
             Main.clearConsole();
-            ArrayList <String> subName = GetList.getList(FILESUBNAME);
             ArrayList <String> idList = GetList.getList(FILESUBID);
-            ArrayList <String> creditlist = GetList.getList(FILESUBCREDIT);
             int sizeId = idList.size();
             System.out.println("\n---Subject Name List---\n");
             showList();
@@ -356,9 +292,8 @@ public class SubjectFuntion {
             String delId = subInFor.get(1);
             String delCredit = subInFor.get(2);
             do{
-                if(subInFor.size() < 4) {
-                    System.out.println("There are still students, can't not deleted.");
-                    quit1 = true;
+                if(subInFor.size() > 4) {
+                    System.out.println("There are still students, can't not deleted.\n");
                 } else {
                     try {
                         ArrayList <String> newdelNameTxt = GetList.getListDel(FILESUBNAME, delName);
@@ -367,15 +302,44 @@ public class SubjectFuntion {
                             f.format(string + '\n');
                         }
                         f.close();
-                        File file = new File(FILESUBIDLIST + "\\" + subIdFromName + ".txt");
-                        file.delete();
+                    } catch (Exception e) {
+                        System.out.println("can't delete file name.txt");
+                    }
+                    try {
+                        ArrayList <String> newdelIdTxt = GetList.getListDel(FILESUBID, delId);
+                        Formatter f = new Formatter(FILESUBID);
+                        for(String string : newdelIdTxt) {
+                            f.format(string + "\n");
+                        }
+                        f.close();
+                    } catch (Exception e) {
+                         System.out.println("can't delete file id.txt");
+                    }
+                    try {
+                        ArrayList <String> newdelCreditTxt = GetList.getListDel(FILESUBCREDIT, delCredit);
+                        Formatter f = new Formatter(FILESUBCREDIT);
+                        for(String string : newdelCreditTxt) {
+                            f.format(string + "\n");
+                        } 
+                        f.close();
+                    } catch (Exception e) {
+                        System.out.println("can't delete file credit.txt");
+                    }
+                    try {
+                        File f = new File(FILESUBIDLIST + "\\" + subIdFromName + ".txt");
+                        f.delete();
                     } catch (Exception e) {
                         System.out.println("can't delete file list");
                     }
-
                 }
             } while(!quit1);
-
+            Main.clearConsole();
+            System.out.println("what you want to do next?");
+            System.out.println("1. go back");
+            System.out.println("2. continue delete?");
+            if (Main.choice(2) == 1){
+                quit = true;
+            }
         } while(!quit);
 
     }

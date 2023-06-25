@@ -39,7 +39,6 @@ public class GetList {
             reader.close();
         }
         catch (Exception exception){
-            System.out.println("Cannot Read :  "+path);
         }
         return list;
     }
