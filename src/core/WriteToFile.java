@@ -9,6 +9,7 @@ import java.util.Formatter;
 
 public class WriteToFile {
     //tạo file mới và ghi nội dung vào file
+
     public static void writtNewToFile(String patch, String content) {
         try {
             Formatter f = new Formatter(patch);
@@ -21,6 +22,7 @@ public class WriteToFile {
         }
     }
 
+    // ghi thêm dong mới trong file txt
     public static void WriteToFile(String patch, String content) {
         try {
             File f = new File(patch);

@@ -50,6 +50,7 @@ public class SubjectFuntion {
         }
     }
 
+    // hiện danh sách Subjects
     public static void showList() {
         System.out.println("    ---Subject List---\n");
         ArrayList<String> subjectList = GetList.getList(FILESUBNAME);
@@ -62,6 +63,7 @@ public class SubjectFuntion {
         return;
     }
 
+    // tạo mới Subjects
     public static void createNewSubject() {
         Main.clearConsole();
         Subject sub = new Subject();
@@ -104,6 +106,7 @@ public class SubjectFuntion {
         } while(!check);
     }
 
+    //
     public static void readAndUpdata() {
         Main.clearConsole();
         System.out.println("chose what subject you want to update\n");
@@ -223,6 +226,7 @@ public class SubjectFuntion {
         }
     }
 
+    // upadate name
     public static String updateName() {
         boolean check = true;
         String newName = "";
@@ -235,6 +239,7 @@ public class SubjectFuntion {
         return newName;
     }
     
+    // update Id
     public static String updateId() {
         boolean check = true;
         String newId = "";
@@ -248,6 +253,7 @@ public class SubjectFuntion {
         return newId;
     }
 
+    //update Creadit
     public static String updateCredit() {
         boolean check = true;
         String newCredit = "";
@@ -260,6 +266,7 @@ public class SubjectFuntion {
         return newCredit;
     }
 
+    // xem các mục trong file list
     public static void showSubInFor(ArrayList <String> list) {
         Main.clearConsole();
         try {
@@ -267,6 +274,10 @@ public class SubjectFuntion {
             System.out.println("    - Name:     " + list.get(0));
             System.out.println("    - ID:       " + list.get(1));
             System.out.println("    - Credit:   " + list.get(2));
+            System.out.println("---");
+            for(int i = 3; i < list.size(); i++){
+                System.out.println(list.get(i));
+            }
         } catch (Exception e) {
             System.out.println("can't show information");
             // TODO: handle exception
@@ -274,6 +285,7 @@ public class SubjectFuntion {
         
     }
     
+    // Funstion xóa File
     public static void deleteSubject() {
         boolean quit = false;
         String subIdFromName = "";
